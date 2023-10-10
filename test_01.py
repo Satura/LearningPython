@@ -28,7 +28,18 @@ value_text = text_pr.text
 try:
     assert value_text == 'Products'
 except AssertionError: 
-    print('We have an assertion error')
+    print('We have an assertion error 1')
 else:
-    print('All is fine')
+    print('All is fine 1')
+
+current_url = driver.current_url
+expected_url = 'https://www.saucedemo.com/inventory.html'
+
+try:
+    assert current_url == expected_url
+except AssertionError: 
+    print('We have an assertion error 2')
+else:
+    print('All is fine 2')
+
 driver.close()

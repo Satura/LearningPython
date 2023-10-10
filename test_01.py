@@ -1,12 +1,19 @@
 import time
 from selenium import webdriver
 from selenium.webdriver.common.by import By
+from sys import platform
  
 base_url = 'https://saucedemo.com'
 login = 'standard_user'
 password_common = 'secret_sauce'
 
-driver = webdriver.Firefox(service=webdriver.FirefoxService(executable_path='./webdriver/geckodriver'))
+driver_path = ''
+if platform == 'linux':
+    driver_path = './webdriver/geckodriver'
+elif platform == 'win32':
+    driver_path = './webdriver/geckodriver.exe'
+driver = webdriver.Firefox(service=webdriver.FirefoxService(executable_path=driver_path))
+    
 driver.get(base_url)
 
 user_name = driver.find_element(by=By.ID, value='user-name')
@@ -19,7 +26,7 @@ login_btn.click()
 text_pr = driver.find_element(by=By.CLASS_NAME, value='title')
 value_text = text_pr.text
 try:
-    assert value_text == 'Produts'
+    assert value_text == 'Products'
 except AssertionError: 
     print('We have an assertion error')
 else:

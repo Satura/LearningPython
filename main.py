@@ -8,8 +8,8 @@ if platform == 'linux':
     driver_path = './webdriver/geckodriver'
 elif platform == 'win32':
     driver_path = './webdriver/geckodriver.exe'
-
 driver = webdriver.Firefox(service=webdriver.FirefoxService(executable_path=driver_path))
+
 driver.get('https://saucedemo.com')
 time.sleep(5)
 driver.close()

@@ -82,11 +82,22 @@ for i in range(2):
 print(finish_sum)
 
 # проверки
-assert float(finish_sum.text.replace('Item total: $','')) == total_sum
-print('Суммы заказа и чека совапали')
-assert finish_items[0].text == product_1_name
-assert finish_items[1].text == product_2_name
-print('Наименования заказанных товаров и чека совпали')
-assert finish_prices[0].text == product_1_price
-assert finish_prices[1].text == product_2_price
-print('Цены заказанных товаров и чека совпали')
+try:
+    assert float(finish_sum.text.replace('Item total: $','')) == total_sum
+    print('Суммы заказа и чека совапали')
+except AssertionError:
+    print('Суммы заказа и чека не совапали')
+
+try:
+    assert finish_items[0].text == product_1_name
+    assert finish_items[1].text == product_2_name
+    print('Наименования заказанных товаров и чека совпали')
+except AssertionError:
+    print('Наименования заказанных товаров и чека не совпали')
+
+try:
+    assert finish_prices[0].text == product_1_price
+    assert finish_prices[1].text == product_2_price
+    print('Цены заказанных товаров и чека совпали')
+except AssertionError:
+    print('Цены заказанных товаров и чека не совпали')

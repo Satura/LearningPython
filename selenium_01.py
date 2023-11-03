@@ -33,8 +33,8 @@ sum = 0
 
 # добавление первых двух единиц в корзину
 for i in range(2):
-    print(f'Продукт # {i+1} . Название: {product_names[i].text}, цена: {product_prices[i].text}')
-    sum += float(product_prices[i].text.replace('$',''))
+    print(f'Продукт # {i + 1} . Название: {product_names[i].text}, цена: {product_prices[i].text}')
+    sum += float(product_prices[i].text.replace('$', ''))
     product_btns[i].click()
 print(sum)
 # save item's names and prices
@@ -52,8 +52,8 @@ item_names = driver.find_elements(by=By.CLASS_NAME, value='inventory_item_name')
 item_prices = driver.find_elements(by=By.CLASS_NAME, value='inventory_item_price')
 sum_in_shoppnig = 0
 for i in range(2):
-    print(f'Продукт в корзине # {i+1}. Название: {item_names[i].text}, цена: {item_prices[i].text}')
-    sum_in_shoppnig += float(item_prices[i].text.replace('$',''))
+    print(f'Продукт в корзине # {i + 1}. Название: {item_names[i].text}, цена: {item_prices[i].text}')
+    sum_in_shoppnig += float(item_prices[i].text.replace('$', ''))
 print(sum_in_shoppnig)
 
 # оформление покупки
@@ -74,16 +74,16 @@ continue_btn.click()
 # информация из чека
 finish_items = driver.find_elements(by=By.CLASS_NAME, value='inventory_item_name')
 finish_prices = driver.find_elements(by=By.CLASS_NAME, value='inventory_item_price')
-finish_sum = driver.find_element(by=By.CLASS_NAME, value='summary_subtotal_label') # сумма в чеке до налога
-total_sum = 0 # сумма до налога, которая должна быть
+finish_sum = driver.find_element(by=By.CLASS_NAME, value='summary_subtotal_label')  # сумма в чеке до налога
+total_sum = 0  # сумма до налога, которая должна быть
 for i in range(2):
-    print(f'Куплен продукт # {i+1}. Название: {finish_items[i].text}, цена: {finish_prices[i].text}')
-    total_sum += float(finish_prices[i].text.replace('$',''))
+    print(f'Куплен продукт # {i + 1}. Название: {finish_items[i].text}, цена: {finish_prices[i].text}')
+    total_sum += float(finish_prices[i].text.replace('$', ''))
 print(finish_sum)
 
 # проверки
 try:
-    assert float(finish_sum.text.replace('Item total: $','')) == total_sum
+    assert float(finish_sum.text.replace('Item total: $', '')) == total_sum
     print('Суммы заказа и чека совапали')
 except AssertionError:
     print('Суммы заказа и чека не совапали')
@@ -101,3 +101,5 @@ try:
     print('Цены заказанных товаров и чека совпали')
 except AssertionError:
     print('Цены заказанных товаров и чека не совпали')
+
+driver.close()

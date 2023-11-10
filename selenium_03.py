@@ -67,6 +67,7 @@ item_price = driver.find_element(by=By.CLASS_NAME, value='inventory_item_price')
 try:
     assert item_name.text == ch_prod_name
     assert float(item_price.text.replace('$', '')) == ch_prod_price
+    print('В корзину попало то, что нужно')
 except AssertionError:
     print('упс, не тот товар или цена')
 
@@ -104,6 +105,7 @@ try:
     assert float(finish_sum.text.replace('Item total: $', '')) == ch_prod_price
 except AssertionError:
     print('Итоговая сумма (до налогов) не совпала')
+print('На оформлении правильный товар')
 
 finish_btn = driver.find_element(by=By.ID, value='finish')
 finish_btn.click()

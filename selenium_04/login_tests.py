@@ -12,7 +12,7 @@ elif platform == 'win32':
     driver_path = '.././webdriver/geckodriver.exe'
 driver = webdriver.Firefox(service=webdriver.FirefoxService(executable_path=driver_path))
 
-# Открываем страницу тестируемого сервиса и получаем логины с паролем
+# Открываем страницу тестируемого сервиса и получаем логины
 base_url = 'https://www.saucedemo.com/'
 driver.get(base_url)
 password = 'secret_sauce'

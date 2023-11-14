@@ -29,13 +29,13 @@ for u in usernames:
         expect_page = 'https://www.saucedemo.com/inventory.html'
         actual_page = driver.current_url
         assert expect_page == actual_page
-        print("Успешная авторизация вот этим пользователем: ", u)
+        print('Успешная авторизация вот этим пользователем:', u)
     except AssertionError:
         try:
             print('Не смогли авторизоваться')
             locked_user_message = 'Epic sadface: Sorry, this user has been locked out.'
             assert login_pg.get_error_message() == locked_user_message
-            print('Попытка авторизоваться заблокированным пользователем: ', u)
+            print('Попытка авторизоваться заблокированным пользователем:', u)
             driver.refresh()
         except AssertionError as ae:
             print('Что-то пошло не так', ae)

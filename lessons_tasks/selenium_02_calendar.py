@@ -8,9 +8,9 @@ from sys import platform
 
 driver_path = ''
 if platform == 'linux':
-    driver_path = './webdriver/geckodriver'
+    driver_path = '../webdriver/geckodriver'
 elif platform == 'win32':
-    driver_path = './webdriver/geckodriver.exe'
+    driver_path = '../webdriver/geckodriver.exe'
 driver = webdriver.Firefox(service=webdriver.FirefoxService(executable_path=driver_path))
 base_url = 'https://demoqa.com/date-picker'
 

@@ -36,31 +36,31 @@ class Product_page(Base):
         return self.driver.find_elements(By.XPATH, self.filter_cats)
 
     def get_filter_btn(self):
-        return self.driver.find_element(By.XPATH, self.filter_find_btn)
+        return WebDriverWait(self.driver, 30).until(EC.element_to_be_clickable((By.XPATH, self.filter_find_btn)))
 
     def get_all_checkboxes(self):
         return self.driver.find_elements(By.XPATH, self.filter_check_boxes)
 
     def get_radio_in_stock(self):
-        return self.driver.find_element(By.XPATH, self.is_in_stock)
+        return WebDriverWait(self.driver, 30).until(EC.element_to_be_clickable((By.XPATH, self.is_in_stock)))
 
     def get_all_alltocarts_btns(self):
         return self.driver.find_elements(By.XPATH, self.open_menu_add_to_cart_btns)
 
     def get_addtocard_real_btn(self):
-        return self.driver.find_element(By.XPATH, self.add_to_cart_btn)
+        return WebDriverWait(self.driver, 30).until(EC.element_to_be_clickable((By.XPATH, self.add_to_cart_btn)))
 
     def get_count_in_cart(self):
-        count = int(self.driver.find_element(By.XPATH, self.count_in_cart).text.split()[1])
+        count = int(WebDriverWait(self.driver, 30).until(EC.element_to_be_clickable((By.XPATH, self.count_in_cart).text.split()[1])))
         return count
 
     # actions
     def open_all_filters(self):
-        self.driver.find_element(By.XPATH, self.filter_cat_usage).click()
-        self.driver.find_element(By.XPATH, self.filter_cat_cover_color).click()
-        self.driver.find_element(By.XPATH, self.filter_cat_paper_color).click()
-        self.driver.find_element(By.XPATH, self.filter_cat_cover).click()
-        self.driver.find_element(By.XPATH, self.filter_cat_brand).click()
+        WebDriverWait(self.driver, 30).until(EC.element_to_be_clickable((By.XPATH, self.filter_cat_usage))).click()
+        WebDriverWait(self.driver, 30).until(EC.element_to_be_clickable((By.XPATH, self.filter_cat_cover_color))).click()
+        WebDriverWait(self.driver, 30).until(EC.element_to_be_clickable((By.XPATH, self.filter_cat_paper_color))).click()
+        WebDriverWait(self.driver, 30).until(EC.element_to_be_clickable((By.XPATH, self.filter_cat_cover))).click()
+        WebDriverWait(self.driver, 30).until(EC.element_to_be_clickable((By.XPATH, self.filter_cat_brand))).click()
 
     def choose_only_in_stock(self):
         self.get_radio_in_stock().click()

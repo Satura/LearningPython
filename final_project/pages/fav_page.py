@@ -22,12 +22,8 @@ class Fav_page(Base):
         return self.driver.find_elements(By.XPATH, self.products_addcart_btn1_list)
 
     def get_count_in_cart(self):
-        count = self.driver.find_element(By.XPATH, self.count_in_cart).text.split()[1]
+        count = WebDriverWait(self.driver, 30).until(EC.element_to_be_clickable((By.XPATH, self.count_in_cart))).text.split()[1]
         return count
-
-    def add_to_cart_1_fav(self):
-        self.get_prods_to_shop()[0].click()
-        self.driver.find_element(By.XPATH, self.products_addcart_btn).click()
 
     def add_to_cart_all_fav(self):
         for e in self.get_prods_to_shop():

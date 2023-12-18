@@ -47,9 +47,12 @@ class Cart_page(Base):
         return self.driver.find_elements(By.XPATH, self.final_sum)[0]
 
     def get_isempty_cart(self):
-        return self.driver.find_element(By.XPATH, self.empty_cart_desc).text
+        return self.driver.find_element(By.XPATH, self.empty_cart_desc).text == 'Корзина\nКорзина пуста'
     # actions
     def clear_cart(self):
         for i in range(len(self.get_remove_btn_list())):
             self.get_remove_first_el().click()
             time.sleep(1)
+
+    def form_order(self):
+        self.get_form_order_btn().click()

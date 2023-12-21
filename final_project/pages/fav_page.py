@@ -4,6 +4,8 @@ from selenium.webdriver.common.by import By
 from selenium.webdriver.support.wait import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
 from final_project.base.base_class import Base
+from final_project.utilities.logger import Logger
+
 
 class Fav_page(Base):
 
@@ -26,10 +28,12 @@ class Fav_page(Base):
         return count
 
     def add_to_cart_all_fav(self):
+        Logger().add_start_step(method="add_to_cart_all_fav")
         for e in self.get_prods_to_shop():
             e.click()
             time.sleep(2)
             self.driver.find_element(By.XPATH, self.products_addcart_btn).click()
+        Logger.add_end_step(url=self.driver.current_url, method="add_to_cart_all_fav")
 
 
 

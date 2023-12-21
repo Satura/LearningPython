@@ -3,6 +3,7 @@ from selenium.webdriver.support.wait import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
 from final_project.base.base_class import Base
 from final_project.pages.home_page import Home_page
+from final_project.utilities.logger import Logger
 
 
 class Login_page(Base):
@@ -43,6 +44,8 @@ class Login_page(Base):
         # hp = Home_page(self.driver)
         # hp.open_site()
         # hp.go_to_auth()
+        Logger().add_start_step(method="authorization")
         self.input_login(Base.INDILOGIN)
         self.input_password(Base.INDIPASS)
         self.login_click()
+        Logger.add_end_step(url=self.driver.current_url, method="authorization")

@@ -4,6 +4,7 @@ from selenium.webdriver.common.by import By
 from selenium.webdriver.support.wait import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
 from final_project.base.base_class import Base
+from final_project.utilities.logger import Logger
 
 
 class Product_page(Base):
@@ -69,9 +70,12 @@ class Product_page(Base):
         self.get_filter_btn().click()
 
     def choose_prod_to_add_to_cart(self, i):
+        Logger().add_start_step(method="choose_prod_to_cart")
         self.get_all_alltocarts_btns()[i].click()
         time.sleep(1)
         self.get_addtocard_real_btn().click()
+        Logger.add_end_step(url=self.driver.current_url, method="choose_prod_to_cart")
+
 
     def go_to_cart(self):
         WebDriverWait(self.driver, 30).until(EC.element_to_be_clickable((By.XPATH, self.cart_btn))).click()

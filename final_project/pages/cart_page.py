@@ -4,6 +4,8 @@ from selenium.webdriver.common.by import By
 from selenium.webdriver.support.wait import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
 from final_project.base.base_class import Base
+from final_project.utilities.logger import Logger
+
 
 class Cart_page(Base):
 
@@ -50,9 +52,12 @@ class Cart_page(Base):
         return self.driver.find_element(By.XPATH, self.empty_cart_desc).text == 'Корзина\nКорзина пуста'
     # actions
     def clear_cart(self):
+        Logger().add_start_step(method="clear_cart")
         for i in range(len(self.get_remove_btn_list())):
             self.get_remove_first_el().click()
             time.sleep(1)
+        Logger.add_end_step(url=self.driver.current_url, method="clear_cart")
+
 
     def form_order(self):
         self.get_form_order_btn().click()

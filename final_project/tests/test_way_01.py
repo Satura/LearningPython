@@ -13,12 +13,13 @@ from final_project.pages.cart_page import Cart_page
 # Определяем где взять webdriver в зависимости от используемой ОС
 driver_path = ''
 if platform == 'linux':
-    driver_path = '.././webdriver/geckodriver'
+    driver_path = './webdriver/geckodriver'
 elif platform == 'win32':
-    driver_path = '.././webdriver/geckodriver.exe'
+    driver_path = './webdriver/geckodriver.exe'
 driver = webdriver.Firefox(service=webdriver.FirefoxService(executable_path=driver_path))
 now_date = datetime.datetime.now().strftime('%Y-%m-%d_%H-%M-%S')
 name_scrsh = 'screenshot_' + now_date + '.png'
+
 def test_shop_fav():
     print('Авторизация...')
     hp = Home_page(driver)

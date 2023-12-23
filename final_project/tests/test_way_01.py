@@ -1,6 +1,6 @@
 import datetime
 import time
-import pytest
+import allure
 from selenium import webdriver
 from selenium.webdriver.common.by import By
 from sys import platform
@@ -20,6 +20,8 @@ driver = webdriver.Firefox(service=webdriver.FirefoxService(executable_path=driv
 now_date = datetime.datetime.now().strftime('%Y-%m-%d_%H-%M-%S')
 name_scrsh = 'screenshot_' + now_date + '.png'
 
+
+@allure.description('Добавление всего Избранного в Корзину')
 def test_shop_fav():
     print('Авторизация...')
     hp = Home_page(driver)
@@ -42,6 +44,7 @@ def test_shop_fav():
     assert int(fp.get_count_in_cart()) == len(fp.get_prods_to_shop())
 
 
+@allure.description('Добавление новинки по фильтрам в Корзину')
 def test_find_add_new():
     print('Переходим к новинкам')
     hp = Home_page(driver)
@@ -75,6 +78,8 @@ def test_find_add_new():
 
     print('Сформировали корзину, переходим к ней')
 
+
+@allure.description('Очистка Корзины')
 def test_clear_cart():
     hp = Home_page(driver)
     hp.go_to_cart()

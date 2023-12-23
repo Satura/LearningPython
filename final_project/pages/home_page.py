@@ -1,3 +1,4 @@
+import allure
 from selenium.webdriver.common.by import By
 from selenium.webdriver.support.wait import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
@@ -31,19 +32,24 @@ class Home_page(Base):
     search_field = "//input[@name='keywords']"
 
     def open_site(self):
-        self.driver.get(self.home_url)
+        with allure.step('Открытие сайта'):
+            self.driver.get(self.home_url)
 
     def go_to_auth(self):
-        WebDriverWait(self.driver, 30).until(EC.element_to_be_clickable((By.XPATH, self.enter_link))).click()
+        with allure.step('Переход на страницу авторизации'):
+            WebDriverWait(self.driver, 30).until(EC.element_to_be_clickable((By.XPATH, self.enter_link))).click()
 
     def go_to_favorite(self):
-        WebDriverWait(self.driver, 30).until(EC.element_to_be_clickable((By.XPATH, self.fav_btn))).click()
+        with allure.step('Переход на страницу Избранного'):
+            WebDriverWait(self.driver, 30).until(EC.element_to_be_clickable((By.XPATH, self.fav_btn))).click()
 
     def go_to_cart(self):
-        WebDriverWait(self.driver, 30).until(EC.element_to_be_clickable((By.XPATH, self.cart_btn))).click()
+        with allure.step('Переход в корзину'):
+            WebDriverWait(self.driver, 30).until(EC.element_to_be_clickable((By.XPATH, self.cart_btn))).click()
 
     def go_to_new(self):
-        WebDriverWait(self.driver, 30).until(EC.element_to_be_clickable((By.XPATH, self.new_btn))).click()
+        with allure.step('Переход в категорию "Новинки"'):
+            WebDriverWait(self.driver, 30).until(EC.element_to_be_clickable((By.XPATH, self.new_btn))).click()
     def go_to_pocketbooks(self):
         WebDriverWait(self.driver, 30).until(EC.element_to_be_clickable((By.XPATH, self.pocketbooks_btn))).click()
     def go_to_accessories(self):

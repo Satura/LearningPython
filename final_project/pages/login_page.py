@@ -1,3 +1,4 @@
+import allure
 from selenium.webdriver.common.by import By
 from selenium.webdriver.support.wait import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
@@ -44,8 +45,9 @@ class Login_page(Base):
         # hp = Home_page(self.driver)
         # hp.open_site()
         # hp.go_to_auth()
-        Logger().add_start_step(method="authorization")
-        self.input_login(Base.INDILOGIN)
-        self.input_password(Base.INDIPASS)
-        self.login_click()
-        Logger.add_end_step(url=self.driver.current_url, method="authorization")
+        with allure.step('Авторизация'):
+            Logger().add_start_step(method="authorization")
+            self.input_login(Base.INDILOGIN)
+            self.input_password(Base.INDIPASS)
+            self.login_click()
+            Logger.add_end_step(url=self.driver.current_url, method="authorization")

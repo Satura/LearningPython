@@ -1,5 +1,6 @@
 import time
 
+import allure
 from selenium.webdriver.common.by import By
 from selenium.webdriver.support.wait import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
@@ -24,16 +25,18 @@ class Fav_page(Base):
         return self.driver.find_elements(By.XPATH, self.products_addcart_btn1_list)
 
     def get_count_in_cart(self):
-        count = WebDriverWait(self.driver, 30).until(EC.element_to_be_clickable((By.XPATH, self.count_in_cart))).text.split()[1]
-        return count
+        with allure.step('Определение количества товаров в Корзине'):
+            count = WebDriverWait(self.driver, 30).until(EC.element_to_be_clickable((By.XPATH, self.count_in_cart))).text.split()[1]
+            return count
 
     def add_to_cart_all_fav(self):
-        Logger().add_start_step(method="add_to_cart_all_fav")
-        for e in self.get_prods_to_shop():
-            e.click()
-            time.sleep(2)
-            self.driver.find_element(By.XPATH, self.products_addcart_btn).click()
-        Logger.add_end_step(url=self.driver.current_url, method="add_to_cart_all_fav")
+        with allure.step('Добавление всего Избранного в Корзину'):
+            Logger().add_start_step(method="add_to_cart_all_fav")
+            for e in self.get_prods_to_shop():
+                e.click()
+                time.sleep(2)
+                self.driver.find_element(By.XPATH, self.products_addcart_btn).click()
+            Logger.add_end_step(url=self.driver.current_url, method="add_to_cart_all_fav")
 
 
 

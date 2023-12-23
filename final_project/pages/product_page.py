@@ -1,5 +1,6 @@
 import time
 
+import allure
 from selenium.webdriver.common.by import By
 from selenium.webdriver.support.wait import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
@@ -57,24 +58,27 @@ class Product_page(Base):
 
     # actions
     def open_all_filters(self):
-        WebDriverWait(self.driver, 30).until(EC.element_to_be_clickable((By.XPATH, self.filter_cat_usage))).click()
-        WebDriverWait(self.driver, 30).until(EC.element_to_be_clickable((By.XPATH, self.filter_cat_cover_color))).click()
-        WebDriverWait(self.driver, 30).until(EC.element_to_be_clickable((By.XPATH, self.filter_cat_paper_color))).click()
-        WebDriverWait(self.driver, 30).until(EC.element_to_be_clickable((By.XPATH, self.filter_cat_cover))).click()
-        WebDriverWait(self.driver, 30).until(EC.element_to_be_clickable((By.XPATH, self.filter_cat_brand))).click()
+        with allure.step('Раскрытие всех фильтров'):
+            WebDriverWait(self.driver, 30).until(EC.element_to_be_clickable((By.XPATH, self.filter_cat_usage))).click()
+            WebDriverWait(self.driver, 30).until(EC.element_to_be_clickable((By.XPATH, self.filter_cat_cover_color))).click()
+            WebDriverWait(self.driver, 30).until(EC.element_to_be_clickable((By.XPATH, self.filter_cat_paper_color))).click()
+            WebDriverWait(self.driver, 30).until(EC.element_to_be_clickable((By.XPATH, self.filter_cat_cover))).click()
+            WebDriverWait(self.driver, 30).until(EC.element_to_be_clickable((By.XPATH, self.filter_cat_brand))).click()
 
     def choose_only_in_stock(self):
         self.get_radio_in_stock().click()
 
     def click_find_filter_btn(self):
-        self.get_filter_btn().click()
+        with allure.step('Запуск поиска по фильтрам'):
+            self.get_filter_btn().click()
 
     def choose_prod_to_add_to_cart(self, i):
-        Logger().add_start_step(method="choose_prod_to_cart")
-        self.get_all_alltocarts_btns()[i].click()
-        time.sleep(1)
-        self.get_addtocard_real_btn().click()
-        Logger.add_end_step(url=self.driver.current_url, method="choose_prod_to_cart")
+        with allure.step('Добавление продукта в Корзину'):
+            Logger().add_start_step(method="choose_prod_to_cart")
+            self.get_all_alltocarts_btns()[i].click()
+            time.sleep(1)
+            self.get_addtocard_real_btn().click()
+            Logger.add_end_step(url=self.driver.current_url, method="choose_prod_to_cart")
 
 
     def go_to_cart(self):
